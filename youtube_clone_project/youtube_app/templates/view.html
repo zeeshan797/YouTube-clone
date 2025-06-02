@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}{{video.title}}{% endblock %}
+
+{% block content %}
+<div class="page-grid">
+
+  <!-- Left: Main Video -->
+  <div class="player-section">
+    <video class="player-video" controls autoplay poster="{% if video.thumbnail %}{{ video.thumbnail.url }}{% endif %}">
+      <source src="{{ video.video.url }}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <h2 class="player-video-title">{{ video.title }}</h2>
+    <div class="user">
+      <div class="avatar-circle">
+        {{ video.user.username|slice:":1"|upper }}
+      </div>
+      <p class="player-video-user">{{video.user.username}}</p>
+    </div>
+    <hr>
+    <div class="player-video-desc">
+      <p>{{video.views}} Views | {{video.date|date:'d M y'}}</p>
+      <p>{{ video.desc }}</p>
+    </div>
+  </div>
+
+  <!-- Right: Other Videos -->
+  <div class="sidebar-section">
+  {% for vid in videos %}
+    {% if vid.id != video.id %}
+    <a href="{% url 'play' vid.id %}">
+      <div class="suggestion-card">
+        <video class="suggestion-thumb" poster="{% if vid.thumbnail %}{{ vid.thumbnail.url }}{% endif %}" muted>
+          <source src="{{ vid.video.url }}" type="video/mp4">
+        </video>
+        <div class="suggestion-content">
+          <div class="suggestion-title">{{ vid.title }}</div>
+          <div class="details">
+            <p>{{vid.user.username}}</p>
+            <p>{{vid.views}} Views | {{vid.date|date:'d M y'}}</p>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -18,13 +18,13 @@ A Django-based web application that replicates core YouTube functionalities. Thi
 - SQLite3
 - HTML/CSS
 - JavaScript
-- Bootstrap (for styling)
+
 
 ## Installation
 
 1. Clone the repository
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/zeeshan797/youtube-clone.git
 cd youtube-clone
 ```
 
